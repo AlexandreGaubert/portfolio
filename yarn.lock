@@ -1478,6 +1478,11 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
+"@emailjs/browser@^3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@emailjs/browser/-/browser-3.4.0.tgz#47e9bf7b52a45ec416a6c82b89876316e32053aa"
+  integrity sha512-pTR9wEj0KLrJBVWFfB6IFEwmGIod/6cfN541Y0TVN2+9Bbn+R9a8gq6GeJZ6ggbYs36J3gCTXDyVKhtxjRsjtw==
+
 "@eslint/eslintrc@^0.4.3":
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-0.4.3.tgz#9e42981ef035beb3dd49add17acb96e8ff6f394c"
@@ -9728,6 +9733,11 @@ react-error-overlay@^6.0.9:
   version "6.0.9"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
+
+react-hook-form@^7.22.3:
+  version "7.22.3"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.22.3.tgz#a66da5e0eaf19c3625f03af8a15266e08b4d000c"
+  integrity sha512-VhWJ531WbyP25C0O0nNTe6GNHmw/zFrJAXJLGKEeseNHitjcQXZ7OsdHbFSiH2KEYmY9tDFkMz9UzWUHdyFswQ==
 
 react-is@^16.8.1:
   version "16.13.1"

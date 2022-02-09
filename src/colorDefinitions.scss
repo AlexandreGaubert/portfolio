@@ -1,4 +1,4 @@
-$colors: ( primary: #2D9CDB, text: #F1FAEE, secondary: #1D3557);
+$colors: ( primary: #2D9CDB, text: #F1FAEE, secondary: #EB5C68, bgColor: #F1FAEE);
 @function color($colorName) {
     @return map-get($colors, $colorName);
 }

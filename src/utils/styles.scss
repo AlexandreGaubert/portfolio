@@ -1,0 +1,59 @@
+$navbar-height: 80px;
+
+@mixin flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin dot {
+    border: 1px solid white;
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    position: relative;
+    cursor: pointer;
+    line-height: 0;
+    display: flex;
+    &.selected:after {
+        content: " ";
+        position: absolute;
+        background-color: white;
+        top: 50%;
+        left: 50%;
+        height: calc(100% - 4px);
+        width: calc(100% - 4px);
+        transform: translate(-50%, -50%);
+        border-radius: 100%;
+        margin: auto;
+    }
+}
+
+@mixin arrow($size, $color, $direction: left) {
+    content: "";
+    position: absolute;
+    border: $size solid transparent;
+    top: 50%;
+    transform: translateY(-50%);
+
+    @if $direction == left {
+        left: -($size * 2) + 2;
+        border-right-color: $color;
+    }
+
+    @if $direction == right {
+        right: -($size * 2) + 2;
+        border-left-color: $color;
+    }
+
+    @if $direction == up {
+        left: 50%;
+        transform: translateX(-50%);
+        top: -($size * 2) + 2;
+        border-bottom-color: $color;
+    }
+}

@@ -1,0 +1,99 @@
+@import '../../../../utils/styles.scss';
+
+$serviceWidth: 350px;
+$serviceHeight: 500px;
+$halfServiceWidth: calc($serviceWidth / 2);
+
+@media screen and (max-width: 980px) {
+    $serviceWidth: $serviceWidth * 0.9 !global;
+    $halfServiceWidth: calc($serviceWidth / 2) !global;
+}
+
+.service {
+    @include flex-column;
+    align-items: center;
+    width: $serviceWidth;
+    height: $serviceHeight;
+    background: #f1faee;
+    padding: 16px;
+    justify-content: space-evenly;
+    text-align: center;
+    transition: all .4s ease-in-out;
+    position: absolute;
+    
+    & > .service-icon {
+        font-size: 48px;
+        color: #EB5C68;
+    }
+    & > .service-title {
+        text-transform: uppercase;
+        font-size: larger;
+        margin: 16px 0;
+    }
+    & > .service-separator {
+        width: 50%;
+        border-bottom: 1px solid;
+    }
+    & > .service-description {
+        white-space: pre-wrap;
+        margin: 16px 0;
+    }
+
+    & > .service-action-btn { // Button
+        @include flex-row;
+        align-items: center;
+        justify-content: space-around;
+        align-items: center;
+        border-radius: 40px;
+        color: white;
+        text-transform: uppercase;
+        cursor: pointer;
+        background-size: 200%;
+        background-position: 0%;
+        background-image: linear-gradient(to right, #EB5C68 50%, darken(#EB5C68, 15%) 50%);
+        transition: background-position .2s ease;
+        margin-bottom: 16px;
+        line-height: 0;
+        padding: 12px;
+
+        & > i {
+            margin-right: 16px;
+        }
+        &:hover {
+            background-position: 100%;
+        }
+    }
+}
+
+.service:nth-child(1) {
+    transform: rotateY(270deg) translateZ($halfServiceWidth);
+}
+
+.service:nth-child(2) {
+    transform: rotateY(0) translateZ($halfServiceWidth);
+    z-index: 10;
+}
+
+.service:nth-child(3) {
+    transform: rotateY(90deg) translateZ($halfServiceWidth);
+}
+
+.service:nth-child(4) {
+    transform: rotateY(180deg) translateZ($halfServiceWidth);
+}
+
+@media screen and (max-width: 980px) {
+    .service {
+        font-size: large;
+        padding: 8px;
+
+        & > .service-icon {
+            font-size: 40px;
+            color: #EB5C68;
+        }
+
+        & > .service-action-btn {
+            background-position: 100%;
+        }
+    }
+}

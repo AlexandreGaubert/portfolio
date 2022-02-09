@@ -1,0 +1,77 @@
+@import '../../../../utils/styles.scss';
+@import '../../../../colorDefinitions.scss';
+
+@media screen and (max-width: 900px) {
+    #header {
+        font-size: xx-large !important;
+
+        & #textWithTypewriter {
+            flex-direction: column;
+            align-items: flex-start !important;
+        }
+    }
+}
+
+@media screen and (max-width: 530px) {
+    #header {
+        font-size: x-large !important;
+        flex-direction: column !important;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #profile-pic {
+        & img {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 32px
+        }
+    }
+}
+
+#title-container {
+    @include flex-column;
+    justify-content: center;
+    width: 100%;
+}
+
+#header {
+    @include flex-row;
+    font-size: xxx-large;
+    font-weight: 100;
+    margin-top: 16px;
+    color: #f1faee;
+   
+    strong {
+        color: color(secondary);
+        font-weight: 400
+    }
+    & #title {
+        @include flex-column;
+        flex: 2;
+        & span#textWithTypewriter {
+            display: flex;
+            align-items: center;
+            white-space: pre;
+        }
+    }
+}
+
+#profile-pic {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    &>img {
+        border-radius: 100%;
+        margin-right: 16px;
+        width: 120px;
+        height: 120px;
+        overflow: hidden;
+        border: 3px solid #f1faee;
+        padding: 4px;
+    }
+}
+
+#textWithTypewriter {
+    width: 100%
+}

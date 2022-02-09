@@ -1,0 +1,223 @@
+@import '../../../utils/styles.scss';
+
+.input {
+    margin: auto;
+    display: flex;
+    height: 100%;
+    background: transparent;
+    border-radius: 9px;
+    user-select: none;
+    outline: none;
+    width: 100%;
+    position: relative;
+    background-color: white;
+
+    & > div {
+        display: flex;
+        flex-direction: column;
+        padding-left: 12px;
+        border-radius: 0 8px 8px 0;
+        flex: 1;
+    }
+    & input {
+        outline: none;
+        border: none;
+        flex: 1;
+        border-radius: 8px;
+        font-size: x-large;
+        width: 100%;
+    }
+    & label {
+        color: #666666;
+        letter-spacing: -1px;
+    }
+    & > .input-icon {
+        font-size: xx-large;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        background: #457b9d;
+        border-radius: 8px 0 0 8px;
+        color: white;
+    }
+    &.focused {
+        box-shadow: 0 0 10px #0007;
+        outline: 3px solid #2832c2;
+    }
+    &.valid {
+        outline: 3px solid #2e7d32;
+    }
+    &.error {
+        outline: 3px solid #e63946;
+    }
+}
+
+.input .status-icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 0.7em;
+    color: white;
+    z-index: 2;
+    margin: auto 12px;
+    width: 1.8em;
+    height: 1.8em;
+
+    & > i {
+        text-align: center;
+    }
+
+    &.valid {
+        background-color: #2e7d32;
+        animation: checkJumpIn .7s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+
+    &.error {
+        background-color: #e63946;
+        cursor: help;
+
+        &:hover {
+            & .error-message {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            top: 0; bottom: 0; left: 0; right: 0;
+            border: 2px solid #e63946;
+            animation: errorPulse 1s infinite ease-in-out;
+        }
+    }
+}
+
+.error-message {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(calc(100% + 12px));
+    background: #e63946;
+    padding: 12px;
+    font-size: small;
+    transition: opacity .2s ease-out;
+    max-width: 500px;
+    width: max-content;
+    box-shadow: 0 0 10px 0 #0007;
+    border-radius: 8px;
+    font-weight: 100;
+
+    &:after {
+        @include arrow(10px, #e63946, up);
+    }
+}
+
+.input textarea {
+    max-height: 100%;
+    resize: none;
+    margin: 8px;
+    margin-left: 0;
+    font-size: x-large;
+    outline: none;
+    border: 0;
+    width: 100%;
+}
+
+.select {
+    height: 100%;
+    font-size: larger;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    position: relative;
+
+    & .toggler {
+        transition: transform .2s ease-in-out;
+        cursor: pointer;
+
+        &.open {
+            transform: rotate(-180deg);
+        }
+    }
+
+    & .menu-list {
+        max-height: 0;
+        overflow: hidden;
+        width: calc(100% + 12px);
+        transition: max-height .2s ease-in-out;
+        background-color: white;
+        z-index: 1000;
+        position: absolute;
+        top: 110%;
+        box-shadow: 0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f;
+        border-radius: 8px;
+        left: -12px;
+        &.open {
+            max-height: 500px;
+        }
+        & option {
+            padding: 8px;
+            cursor: pointer;
+            transition: background-color .1s linear;
+            &:hover {
+                background-color: #00000012;
+            }
+        }
+    }
+}
+
+@keyframes errorPulse {
+    0% { 
+        top: 0; bottom: 0; left: 0; right: 0;
+        opacity: 1;
+    }
+    40% { 
+        top: -8px; bottom: -8px; left: -8px; right: -8px;
+        opacity: 0.6;
+    }
+    100% { 
+        top: -8px; bottom: -8px; left: -8px; right: -8px;
+        opacity: 0
+    }
+}
+
+@keyframes checkJumpIn {
+    0% {
+        transform: scale(1.5);
+    }
+}
+
+@keyframes checkRevealLeft {
+    from {
+        max-width: 0px;
+    }
+
+    to {
+        max-width: 20px;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    .input .input-icon {
+        width: 50px;
+        font-size: x-large;
+    }
+
+    .input {
+        font-size: small;
+
+        & input {
+            font-size: large;
+        }
+    }
+} 
+    

@@ -1,46 +1,22 @@
-# Getting Started with Create React App
+# Présentation
+Je m'appelle Alexandre Gaubert et je suis développeur front-end, spécialisé sur ReactJS. J'ai réalisé ce site dans l'idée d'apporter une visibilité sur mon travail et mes compétences.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Histoire
+Autodidacte, je suis développeur web front-end à temps plein, depuis près de trois ans, chez un éditeur de logiciel, leader de son marché.
+J'ai la responsabilité de toute la partie front-end en autonomie ainsi que la mise en place et la maintenance des tests unitaires.
+Je dois veiller à la bonne application du design system, notamment en apportant des composants génériques que les autres développeurs doivent utiliser.
 
-## Available Scripts
+Avant cela, j'ai effectué un service civique dans une résidence pour personnes âgées où j'y ai développé une application afin de faciliter la vie quotidienne au sein de la résidence (choix des repas, planning des animations, galerie photo, etc.).
+J'y ai aussi effectué des ateliers d'initiation à l'informatique afin de rompre l'isolement dont sont victimes nos aînés.
 
-In the project directory, you can run:
+## Technos
+Pour ce portfolio, j'ai utilisé ReactJS et Typescript, qui sont mes technos favorites et les plus utilisées. Ce site est sans serveur, j'ai utilisé EmailJS pour l'envoi d'e-mails.
 
-### `yarn start`
+## Compétences
+Je suis spécialisé en ReactJS que je pratique depuis trois ans en milieu professionnel, et près d'un an lors de mon service civique.
+Je préfère développer en TypeScript qui est pour moi devenu incontournable tant il comble les multiples lacunes de Javascript vanilla.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Au coeur d'un process agile depuis trois années, j'ai pu en expérimenter les bienfaits sur mon quotidien et surtout dans la communication au sein de l'équipe de développement et des différentes parties prenantes. Chacun est impliqué dans le process du début à la fin.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+##Vision
+Aujourd'hui, je suis à la recherche de nouveaux challenges pour ma carrière, de nouveaux projets et de nouvelles opportunités afin d'étoffer mon expérience professionnelle et de la rendre la plus complète possible.

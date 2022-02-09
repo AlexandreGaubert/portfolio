@@ -1,0 +1,81 @@
+@import 'colorDefinitions.scss';
+@import './utils/styles.scss';
+
+body {
+    margin: 0;
+    font-family: 'Roboto Mono', monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: color(bgColor);
+    overflow: hidden;
+}
+  
+* {
+    box-sizing: border-box;
+}
+
+.App {
+    overflow: hidden;
+    height: 100vh;
+    position: relative;
+}
+
+#main-view {
+    overflow: hidden;
+    position: relative;
+}
+
+#dot-nav {
+    position: fixed;
+    right: 0;
+    top: calc(100vh / 2);
+    transform: translateY(-50%);
+    z-index: 1;
+    transition: transform .7s ease;
+    padding-left: 100px;
+    &:hover {
+        & .dot-legend {
+            opacity: 1;
+            transform: translateX(-110%) translateY(-50%);
+        }
+    }
+    & .dot {
+        @include dot;
+        margin: 16px;
+        user-select: none;
+        transition: transform .2s ease-in-out;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
+.dot-legend {
+    position: absolute;
+    top: 50%;
+    transform: translateX(-70%) translateY(-50%);
+    color: white;
+    opacity: 0;
+    transition: all .2s ease-in-out;
+}
+
+@for $i from 0 to 4 {
+    .dot:nth-child(#{$i + 1}) {
+        .dot-legend {
+            transition-delay: ($i * .1s);
+        }
+    }
+}
+
+.page {
+    height: 100vh;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+
+@media screen and (max-width: 640px) {
+    #dot-nav {
+        display: none;
+    }
+}

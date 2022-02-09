@@ -1,0 +1,38 @@
+.typewritter {
+    width: fit-content;
+}
+
+.typewritter h1 {
+    overflow-x: hidden;
+    font-size: inherit;
+    font-weight: 400;
+    margin: 0;
+    font-family: "Source Sans Pro", monospace;
+}
+
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+    50% {
+        width: 100%;
+    }
+    80% {
+        width: 100%;
+    }
+    90% {
+        width: 0;
+    }
+    100% {
+        width: 0;
+    }
+}
+
+@keyframes blink {
+    0% {
+        border-right: none;
+    }
+    50% {
+        border-right: 1px solid #f1faee;
+    }
+}

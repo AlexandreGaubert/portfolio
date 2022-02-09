@@ -1,0 +1,188 @@
+$pageBgColor: #2a9d8f;
+
+#contact-page {
+    background-color: $pageBgColor;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#contact-form {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 60px 60px 60px 60px 60px 60px 60px;
+    grid-template-areas: 
+        "name name entreprise entreprise  entreprise"
+        "mail mail mail phone phone"
+        "startDate startDate duration duration duration"
+        "urlLink urlLink urlLink urlLink urlLink"
+        "description description description description description"
+        "description description description description description"
+        "description description description description description"
+    ;
+}
+
+#wave-btn {
+    $transition: 0.25s cubic-bezier(0.310, -0.105, 0.430, 1.400);
+    margin-top: 32px;
+    width: 200px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    line-height: 0;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-image: linear-gradient( #e63946 0% 33.3%, #1d3557 33.3% 66.6%, #2e7d32 66.6% 100%);
+    background-position: 0% 200%;
+    background-size: 100% 300%;
+    outline: none;
+    border: none;
+    font-size: larger;
+    color: white;
+    user-select: none;
+    box-shadow: 0px 0px 10px #0007;
+    transition: background-position .2s ease-out;
+    &.success {
+        background-position: 0% 100%;
+    }
+
+    &.error {
+        background-position: 0% 0%;
+    }
+
+    & #title {
+        font-size: inherit;
+        font-weight: 100;
+        letter-spacing: 1px;
+        transition: transform $transition;
+        left: 64px;
+        z-index: 10;
+        position: absolute;
+    }
+    & #icon {
+        position: absolute;
+        left: 24px;
+        transition: left $transition, transform $transition;
+        z-index: 10;
+        &.success {
+            animation: jumpIn .4s cubic-bezier(.05,.93,.55,1.58)
+        }
+    }
+    &:hover, &:focus, &.success {
+        &:after, &:before {
+            bottom: 150%;
+        }
+        & #title {
+            transform: translateX(200px);
+        }
+        & #icon {
+            left: 50%;
+            transform: translateX(-50%) scale(1.5);
+        }
+    }
+    
+    &:after, &:before {
+        content: " ";
+        position: absolute;
+        height: 400px;
+        width: 400px;
+        bottom: 60%;
+        right: 50%;
+        transform: translate(50%, 0);
+        border-radius: 40%;
+        transition: all .5s;
+    }
+    &:after {
+        background-color: lighten(#1d3557, 15%);
+        animation: wave 5s infinite linear;
+    }
+    &:before {
+        background-color: lighten(#1d3557, 30%);
+        animation: wave 12s infinite linear;
+    }
+}
+
+.loader {
+    height: 1em;
+    width: 1em;
+    &:after {
+        content: " ";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        border-radius: 50%;
+        border: 2px solid #0007;
+        border-top-color: white;
+        animation: spin 1s cubic-bezier(.77,.26,.17,1.01) infinite;
+    }
+}
+
+@keyframes wave {
+    from {
+        transform: translate(50%, 0) rotate(0deg);
+    }
+    to {
+        transform: translate(50%, 0) rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes revealLeft {
+    from {
+        left: 0;
+    }
+    to {
+        left: 100%;
+    }
+}
+
+@keyframes jumpIn {
+    from {
+        transform: translateX(-50%) scale(0);
+    }
+    to {
+        transform: translateX(-50%) scale(1.5);
+    }
+}
+
+@media screen and (max-width: 980px) {
+    #contact-form {
+        width: 100%;
+        padding: 8px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(9, 50px);
+        grid-gap: 8px;
+        overflow: scroll;
+        grid-template-areas: 
+            "name name"
+            "entreprise entreprise"
+            "mail mail"
+            "phone phone"
+            "startDate startDate"
+            "duration duration"
+            "urlLink urlLink"
+            "description description"
+            "description description"
+            "description description"
+        ;
+    }
+
+    #wave-btn {
+        margin: 16px;
+        transform: scale(0.8);
+    }
+}
