@@ -18,5 +18,5 @@ Je préfère développer en TypeScript qui est pour moi devenu incontournable ta
 
 Au coeur d'un process agile depuis trois années, j'ai pu en expérimenter les bienfaits sur mon quotidien et surtout dans la communication au sein de l'équipe de développement et des différentes parties prenantes. Chacun est impliqué dans le process du début à la fin.
 
-##Vision
+## Vision
 Aujourd'hui, je suis à la recherche de nouveaux challenges pour ma carrière, de nouveaux projets et de nouvelles opportunités afin d'étoffer mon expérience professionnelle et de la rendre la plus complète possible.
