@@ -1,0 +1,4 @@
+# Upload only the built site and its config.
+/*
+!/app.yaml
+!/dist/
