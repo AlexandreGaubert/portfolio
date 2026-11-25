@@ -8,8 +8,8 @@ export const EMAIL = 'alexandre2.gaubert@gmail.com';
 export const LINKEDIN = 'https://www.linkedin.com/in/alexandre-gaubert';
 
 // The CV Alexandre validated, one PDF per language, in public/. Set an entry to
-// null to hide its buttons.
-export const CV: Record<Lang, string | null> = { en: '/Alexandre-Gaubert-CV-EN.pdf', fr: '/Alexandre-Gaubert-CV-FR.pdf' };
+// null to hide its buttons; both are hidden until the new CV is ready.
+export const CV: Record<Lang, string | null> = { en: null, fr: null };
 
 type Work = { title: string; text: string; stack: string };
 type Job = { when: string; title: string; text: string };
@@ -71,11 +71,6 @@ export const content: Record<Lang, Content> = {
       sub: 'Four years at Mergify, building the dashboard engineering teams use to merge code safely.',
       items: [
         {
-          title: 'Shipped an LLM feature',
-          text: 'Built the first version of Fix with Mergify: it repairs an invalid configuration file and opens the fix as a pull request. Released in 2026.',
-          stack: 'React, TypeScript, LLM',
-        },
-        {
           title: 'TypeScript and TanStack Router in the React dashboard',
           text: 'Introduced TypeScript to the dashboard and migrated it to TanStack Router.',
           stack: 'TypeScript, TanStack Router',
@@ -87,7 +82,7 @@ export const content: Record<Lang, Content> = {
         },
         {
           title: 'Worked across the product',
-          text: 'Shipped features across the merge queue, CI Insights and Test Engine.',
+          text: 'Shipped features across the merge queue and CI Insights.',
           stack: 'React, TanStack Query, ECharts',
         },
       ],
@@ -137,11 +132,6 @@ export const content: Record<Lang, Content> = {
       sub: "Quatre ans chez Mergify, sur le dashboard que les équipes d'ingénierie utilisent pour merger leur code sans risque.",
       items: [
         {
-          title: 'Une fonctionnalité LLM livrée',
-          text: "J'ai construit la première version de Fix with Mergify : elle répare un fichier de configuration invalide et propose la correction en pull request. Sortie en 2026.",
-          stack: 'React, TypeScript, LLM',
-        },
-        {
           title: 'TypeScript et TanStack Router dans le dashboard React',
           text: "J'ai introduit TypeScript dans le dashboard, puis l'ai migré vers TanStack Router.",
           stack: 'TypeScript, TanStack Router',
@@ -153,7 +143,7 @@ export const content: Record<Lang, Content> = {
         },
         {
           title: "Sur l'ensemble du produit",
-          text: "Des fonctionnalités livrées sur la merge queue, CI Insights et Test Engine.",
+          text: "Des fonctionnalités livrées sur la merge queue et CI Insights.",
           stack: 'React, TanStack Query, ECharts',
         },
       ],
