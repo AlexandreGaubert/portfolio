@@ -23,6 +23,12 @@ handlers:
     upload: dist/fr/freelance/index.html
     secure: always
     redirect_http_response_code: 301
+  # Articles, in French: /fr/articles/<slug>/ is dist/fr/articles/<slug>/index.html.
+  - url: /fr/articles/([a-z0-9-]+)/?
+    static_files: dist/fr/articles/\1/index.html
+    upload: dist/fr/articles/.*/index\.html
+    secure: always
+    redirect_http_response_code: 301
   - url: /fonts/(.*)
     static_files: dist/fonts/\1
     upload: dist/fonts/.*

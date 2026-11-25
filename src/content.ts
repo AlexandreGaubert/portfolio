@@ -1,6 +1,9 @@
 // Every word of the site, in both languages. Published under Alexandre's name:
 // nothing internal to a former employer, nothing that his CV does not say.
 
+import { articles as siteArticles } from './articles';
+import { frenchSpaces } from './typography';
+
 export type Lang = 'en' | 'fr';
 
 export const SITE_URL = 'https://alexandre-gaubert.fr';
@@ -13,7 +16,7 @@ export const CV: Record<Lang, string | null> = { en: '/Alexandre-Gaubert-CV-EN.p
 
 type Work = { title: string; text: string; stack: string };
 type Job = { when: string; title: string; text: string };
-type Article = { title: string; url: string; meta: string };
+type Article = { title: string; url: string; meta: string; read?: string };
 
 export type Content = {
   path: string;
@@ -42,16 +45,12 @@ const articles = {
   providers: 'https://www.linkedin.com/pulse/les-fournisseurs-dia-vont-perdre-leurs-meilleurs-clients-gaubert-eilde/',
 };
 
+// The article published on this site, in French; src/articles.ts holds its text.
+const [onSite] = siteArticles;
+
 const skills = ['React', 'TypeScript', 'Python', 'TanStack Query', 'TanStack Router', 'Playwright', 'Vitest'];
 const support = "L'IA devait remplacer le support client. Elle est en train de le rendre invivable.";
 
-// French typography: a narrow no-break space before « : ; ! ? » and inside « 157 k ».
-function frenchSpaces<T>(value: T): T {
-  if (typeof value === 'string') return value.replace(/ ([:;!?])/g, '\u202f$1').replace(/(\d) k\b/g, '$1\u202fk') as T;
-  if (Array.isArray(value)) return value.map(frenchSpaces) as T;
-  if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, frenchSpaces(v)])) as T;
-  return value;
-}
 
 export const content: Record<Lang, Content> = {
   en: {
@@ -110,9 +109,10 @@ export const content: Record<Lang, Content> = {
     },
     writing: {
       heading: 'Writing',
-      sub: '5 articles and 19 LinkedIn posts on AI (mostly in French), 530k impressions in total, up to 231k for one article',
+      sub: 'On LinkedIn: 5 articles and 19 posts on AI (mostly in French), 530k impressions in total, up to 231k for one article',
       read: 'Read on LinkedIn',
       articles: [
+        { title: onSite.title, url: onSite.path, meta: `${onSite.publishedLabelEn} · in French`, read: 'Read the article' },
         { title: "Les fournisseurs d'IA vont perdre leurs meilleurs clients", url: articles.providers, meta: '157k impressions' },
         { title: support, url: articles.support, meta: '231k impressions' },
       ],
@@ -176,9 +176,10 @@ export const content: Record<Lang, Content> = {
     },
     writing: {
       heading: 'Articles',
-      sub: "5 articles et 19 posts LinkedIn sur l'IA, 530 k impressions au total, jusqu'à 231 k pour un article",
+      sub: "Sur LinkedIn : 5 articles et 19 posts sur l'IA, 530 k impressions au total, jusqu'à 231 k pour un article",
       read: 'Lire sur LinkedIn',
       articles: [
+        { title: onSite.title, url: onSite.path, meta: onSite.publishedLabel, read: "Lire l'article" },
         { title: "Les fournisseurs d'IA vont perdre leurs meilleurs clients", url: articles.providers, meta: '157 k impressions' },
         { title: support, url: articles.support, meta: '231 k impressions' },
       ],
@@ -205,7 +206,7 @@ export type FreelanceContent = {
   mailSubject: string;
   missions: { heading: string; sub: string; items: Mission[] };
   experience: { heading: string; jobs: Job[] };
-  agents: { heading: string; intro: string; points: string[] };
+  agents: { heading: string; intro: string; points: string[]; more: { before: string; link: string; href: string } };
   contact: { heading: string; sub: string };
 };
 
@@ -221,7 +222,7 @@ export const freelance: Record<Lang, FreelanceContent> = {
       `Freelance senior fullstack React developer: day rate €${rate} excl. VAT, available early January 2027, full remote or hybrid in Rennes. 7 years of React and TypeScript, four of them at Mergify.`,
     nav: { missions: 'Contracts', experience: 'Experience', contact: 'Contact' },
     role: 'Senior fullstack developer, React and TypeScript, freelance',
-    lede: 'I join your product team to ship React features, API included, on tested TypeScript code. 7 years of React and TypeScript on SaaS products, four of them at Mergify.',
+    lede: "I'm a React and TypeScript product engineer: I ship features end to end, alongside your product team. 7 years on SaaS products, four of them at Mergify.",
     status: `Day rate €${rate} excl. VAT · Available early January 2027 · Full remote or hybrid in Rennes`,
     propose: 'Propose a contract',
     mailSubject: 'Freelance contract – via alexandre-gaubert.fr',
@@ -250,6 +251,7 @@ export const freelance: Record<Lang, FreelanceContent> = {
         'a test only counts once seen failing;',
         'Claude Code hooks block destructive git commands.',
       ],
+      more: { before: 'How it works, in French: ', link: onSite.title, href: onSite.path },
     },
     contact: { heading: 'A React or TypeScript contract?', sub: 'Tell me the context, the length, the location and the start date.' },
   },
@@ -260,7 +262,7 @@ export const freelance: Record<Lang, FreelanceContent> = {
       `Développeur fullstack React freelance senior : TJM ${rate} € HT, disponible début janvier 2027, full remote ou hybride à Rennes. 7 ans de React et TypeScript, dont quatre chez Mergify.`,
     nav: { missions: 'Missions', experience: 'Parcours', contact: 'Contact' },
     role: 'Développeur fullstack senior, React et TypeScript, en freelance',
-    lede: 'Je rejoins votre équipe produit pour livrer des fonctionnalités React, API comprise, sur un code TypeScript testé. 7 ans de React et TypeScript sur des produits SaaS, dont quatre chez Mergify.',
+    lede: 'Je suis product engineer React et TypeScript : je livre des fonctionnalités de bout en bout, en renfort de votre équipe produit. 7 ans sur des produits SaaS, dont quatre chez Mergify.',
     status: `TJM ${rate} € HT par jour · Disponible début janvier 2027 · Full remote ou hybride à Rennes`,
     propose: 'Proposer une mission',
     mailSubject: 'Mission freelance – via alexandre-gaubert.fr',
@@ -289,6 +291,7 @@ export const freelance: Record<Lang, FreelanceContent> = {
         "un test ne compte qu'une fois vu échouer ;",
         'des hooks Claude Code bloquent les commandes git destructrices.',
       ],
+      more: { before: 'Comment ça marche : ', link: onSite.title, href: onSite.path },
     },
     contact: { heading: 'Une mission React ou TypeScript ?', sub: 'Dites-moi le contexte, la durée, le lieu et la date de démarrage.' },
   }),
