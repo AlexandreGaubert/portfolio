@@ -13,6 +13,16 @@ handlers:
     upload: dist/fr/index.html
     secure: always
     redirect_http_response_code: 301
+  - url: /freelance/?
+    static_files: dist/freelance/index.html
+    upload: dist/freelance/index.html
+    secure: always
+    redirect_http_response_code: 301
+  - url: /fr/freelance/?
+    static_files: dist/fr/freelance/index.html
+    upload: dist/fr/freelance/index.html
+    secure: always
+    redirect_http_response_code: 301
   - url: /fonts/(.*)
     static_files: dist/fonts/\1
     upload: dist/fonts/.*

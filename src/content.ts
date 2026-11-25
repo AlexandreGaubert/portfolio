@@ -24,7 +24,8 @@ export type Content = {
   nav: { work: string; experience: string; writing: string; contact: string; switchLabel: string };
   role: string;
   lede: string;
-  status: string;
+  // The status line, with a link to the freelance page in the middle.
+  status: { before: string; link: string; after: string };
   emailMe: string;
   downloadCv: string;
   work: { heading: string; sub: string; items: Work[] };
@@ -63,7 +64,7 @@ export const content: Record<Lang, Content> = {
     nav: { work: 'Work', experience: 'Experience', writing: 'Writing', contact: 'Contact', switchLabel: 'Lire en français' },
     role: 'Senior Product Engineer, AI-first',
     lede: 'Fullstack engineer with 7 years of React and TypeScript on SaaS products, from frontend architecture to test strategy. Backend experience at Mergify with Python and APIs. As a personal project, I designed an engineering system where a fleet of AI agents plans, codes, tests and ships in parallel, within automated guardrails.',
-    status: 'Open to fullstack and product engineering roles · Full remote, hybrid possible in Rennes',
+    status: { before: 'Open to fullstack and product engineering roles, or to a ', link: 'freelance contract', after: ' · Full remote, hybrid possible in Rennes' },
     emailMe: 'Email me',
     downloadCv: 'Download CV (PDF)',
     work: {
@@ -129,7 +130,7 @@ export const content: Record<Lang, Content> = {
     nav: { work: 'Réalisations', experience: 'Parcours', writing: 'Articles', contact: 'Contact', switchLabel: 'Read in English' },
     role: 'Senior Product Engineer, AI-first',
     lede: "Ingénieur fullstack, 7 ans de React et TypeScript sur des produits SaaS, de l'architecture front à la stratégie de test. Expérience backend chez Mergify, en Python et sur l'API. En projet personnel, j'ai conçu un système d'ingénierie où une flotte d'agents IA planifie, code, teste et livre en parallèle, encadrée par des garde-fous automatisés.",
-    status: 'Ouvert à un poste fullstack ou product engineering · Full remote, hybride possible à Rennes',
+    status: { before: 'Ouvert à un poste fullstack ou product engineering, ou à une ', link: 'mission freelance', after: ' · Full remote, hybride possible à Rennes' },
     emailMe: "M'écrire",
     downloadCv: 'Télécharger mon CV (PDF)',
     work: {
@@ -184,5 +185,110 @@ export const content: Record<Lang, Content> = {
     },
     contact: { heading: 'Contact' },
     photoAlt: "Portrait d'Alexandre Gaubert",
+  }),
+};
+
+// The freelance page, /freelance/ and /fr/freelance/: what a recruiter or a
+// client needs before proposing a contract. The day rate and the start date
+// are the ones Alexandre announces everywhere else.
+type Mission = { title: string; text: string; stack: string };
+
+export type FreelanceContent = {
+  path: string;
+  title: string;
+  description: string;
+  nav: { missions: string; experience: string; contact: string };
+  role: string;
+  lede: string;
+  status: string;
+  propose: string;
+  mailSubject: string;
+  missions: { heading: string; sub: string; items: Mission[] };
+  experience: { heading: string; jobs: Job[] };
+  agents: { heading: string; intro: string; points: string[] };
+  contact: { heading: string; sub: string };
+};
+
+// The offer, also given to search engines as structured data.
+export const OFFER = { dayRate: 450, currency: 'EUR', availableFrom: '2027-01-04' };
+
+export const freelance: Record<Lang, FreelanceContent> = {
+  en: {
+    path: '/freelance/',
+    title: 'Freelance senior fullstack React developer, Rennes and remote · Alexandre Gaubert',
+    description:
+      'Freelance senior fullstack developer: 7 years of React and TypeScript on SaaS products, four of them at Mergify. Day rate €450 excl. VAT, available early January 2027, full remote or hybrid in Rennes.',
+    nav: { missions: 'Contracts', experience: 'Experience', contact: 'Contact' },
+    role: 'Senior fullstack developer, React and TypeScript, freelance',
+    lede: 'I join your product team to ship features end to end, API included, on tested TypeScript code. 7 years of React and TypeScript on SaaS products, four of them at Mergify.',
+    status: 'Day rate €450 excl. VAT · Available early January 2027 · Full remote or hybrid in Rennes',
+    propose: 'Propose a contract',
+    mailSubject: 'Freelance contract – via alexandre-gaubert.fr',
+    missions: {
+      heading: 'What I do on a contract',
+      sub: 'Joining a product team, on an existing React frontend.',
+      items: [
+        { title: 'Ship features end to end', text: 'Components, state, data fetching and tests on the React side, and the API that goes with them on the backend.', stack: 'React, TypeScript, TanStack Query, Python' },
+        { title: 'Modernize an existing frontend', text: 'Bring TypeScript into a JavaScript codebase, migrate the routing or the state management.', stack: 'TypeScript, TanStack Router, Zustand' },
+        { title: 'Set up the frontend test strategy', text: 'End-to-end, integration and unit tests, from CI to code review.', stack: 'Playwright, Cypress, Vitest' },
+        { title: 'Grow a design system', text: 'Build and evolve the shared components with your UX designer.', stack: 'React, TypeScript' },
+      ],
+    },
+    experience: {
+      heading: 'Experience',
+      jobs: [
+        { when: '2022 – 2026', title: 'Senior Frontend Engineer · Mergify', text: 'Features across the merge queue and CI Insights, frontend test strategy, backend projects in Python.' },
+        { when: '2019 – 2022', title: 'Frontend Engineer · Cegid', text: 'Tax management applications for businesses, in React, TypeScript and Redux.' },
+      ],
+    },
+    agents: {
+      heading: 'With AI agents',
+      intro: 'As a personal project, I designed an engineering system where a fleet of AI agents plans, codes, tests and ships in parallel, within automated guardrails:',
+      points: [
+        'a second agent tries to refute every non-trivial change;',
+        'a test only counts once seen failing;',
+        'Claude Code hooks block destructive git commands.',
+      ],
+    },
+    contact: { heading: 'A React or TypeScript contract?', sub: 'Tell me the context, the length, the location and the start date.' },
+  },
+  fr: frenchSpaces({
+    path: '/fr/freelance/',
+    title: 'Développeur fullstack React freelance senior, Rennes et remote · Alexandre Gaubert',
+    description:
+      'Développeur fullstack senior en freelance : 7 ans de React et TypeScript sur des produits SaaS, dont quatre chez Mergify. TJM 450 € HT, disponible début janvier 2027, full remote ou hybride à Rennes.',
+    nav: { missions: 'Missions', experience: 'Parcours', contact: 'Contact' },
+    role: 'Développeur fullstack senior, React et TypeScript, en freelance',
+    lede: 'Je rejoins votre équipe produit pour livrer des fonctionnalités de bout en bout, API comprise, sur un code TypeScript testé. 7 ans de React et TypeScript sur des produits SaaS, dont quatre chez Mergify.',
+    status: 'TJM 450 € HT par jour · Disponible début janvier 2027 · Full remote ou hybride à Rennes',
+    propose: 'Proposer une mission',
+    mailSubject: 'Mission freelance – via alexandre-gaubert.fr',
+    missions: {
+      heading: 'Ce que je fais en mission',
+      sub: "En renfort d'une équipe produit, sur un front React existant.",
+      items: [
+        { title: 'Livrer des fonctionnalités de bout en bout', text: "Composants, état, appels et tests côté React, et l'API qui va avec côté back-end.", stack: 'React, TypeScript, TanStack Query, Python' },
+        { title: 'Moderniser un front existant', text: "Introduire TypeScript dans une base JavaScript, migrer le routing ou la gestion d'état.", stack: 'TypeScript, TanStack Router, Zustand' },
+        { title: 'Poser la stratégie de test du front', text: "Tests end-to-end, d'intégration et unitaires, de la CI à la revue de code.", stack: 'Playwright, Cypress, Vitest' },
+        { title: 'Faire vivre un design system', text: 'Construire et faire évoluer les composants partagés avec votre UX designer.', stack: 'React, TypeScript' },
+      ],
+    },
+    experience: {
+      heading: 'Parcours',
+      jobs: [
+        { when: '2022 – 2026', title: 'Senior Frontend Engineer · Mergify', text: 'Fonctionnalités sur la merge queue et CI Insights, stratégie de test du front, projets back-end en Python.' },
+        { when: '2019 – 2022', title: 'Frontend Engineer · Cegid', text: 'Applications de gestion fiscale pour les entreprises, en React, TypeScript et Redux.' },
+      ],
+    },
+    agents: {
+      heading: 'Avec des agents IA',
+      intro: "En projet personnel, j'ai conçu un système d'ingénierie où une flotte d'agents IA planifie, code, teste et livre en parallèle, encadrée par des garde-fous automatisés :",
+      points: [
+        'un second agent cherche à réfuter chaque changement non trivial ;',
+        "un test ne compte qu'une fois vu échouer ;",
+        'des hooks Claude Code bloquent les commandes git destructrices.',
+      ],
+    },
+    contact: { heading: 'Une mission React ou TypeScript ?', sub: 'Dites-moi le contexte, la durée, le lieu et la date de démarrage.' },
   }),
 };

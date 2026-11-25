@@ -15,7 +15,7 @@ try {
     'sitemap.xml': site.sitemap(),
     'robots.txt': site.robots(),
   };
-  for (const r of site.routes) files[r.file] = site.render(r.lang);
+  for (const r of site.routes) files[r.file] = site.render(r.page, r.lang);
   for (const [file, body] of Object.entries(files)) {
     await mkdir(dirname(join(out, file)), { recursive: true });
     await writeFile(join(out, file), body);
