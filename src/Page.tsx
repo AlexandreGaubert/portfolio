@@ -1,12 +1,26 @@
 import type { ReactNode } from 'react';
 import { CV, EMAIL, LINKEDIN, OFFER, SITE_URL, content, freelance, type Lang } from './content';
+import { articles, type ArticleContent, type Inline } from './articles';
 
-export type PageId = 'home' | 'freelance';
+// An article is in French only: it has one path, and no language switch.
+export type PageId = 'home' | 'freelance' | `article/${string}`;
 
 const other = (lang: Lang): Lang => (lang === 'en' ? 'fr' : 'en');
 
+export const isArticle = (page: PageId): page is `article/${string}` => page.startsWith('article/');
+
+function articleOf(page: PageId): ArticleContent {
+  const a = articles.find((x) => `article/${x.slug}` === page);
+  if (!a) throw new Error(`No article for ${page}`);
+  return a;
+}
+
 // What the <head> and the language switch need from each page.
 function meta(page: PageId, lang: Lang) {
+  if (isArticle(page)) {
+    const a = articleOf(page);
+    return { path: a.path, title: a.title, description: a.description, role: content.fr.role };
+  }
   const c = page === 'home' ? content[lang] : freelance[lang];
   return { path: c.path, title: c.title, description: c.description, role: c.role };
 }
@@ -33,9 +47,31 @@ function person(lang: Lang) {
   };
 }
 
+function articleLd(a: ArticleContent) {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      person('fr'),
+      {
+        '@type': 'BlogPosting',
+        headline: a.title,
+        description: a.description,
+        url: SITE_URL + a.path,
+        mainEntityOfPage: SITE_URL + a.path,
+        inLanguage: 'fr-FR',
+        datePublished: a.published,
+        wordCount: a.words,
+        image: `${SITE_URL}/og-article-${a.slug}.png`,
+        author: { '@id': `${SITE_URL}/#person` },
+      },
+    ],
+  };
+}
+
 function jsonLd(page: PageId, lang: Lang): string {
-  const data =
-    page === 'home'
+  const data = isArticle(page)
+    ? articleLd(articleOf(page))
+    : page === 'home'
       ? { '@context': 'https://schema.org', ...person(lang) }
       : {
           '@context': 'https://schema.org',
@@ -70,7 +106,8 @@ export function Document({ page, lang, css }: { page: PageId; lang: Lang; css: s
   const c = content[lang];
   const m = meta(page, lang);
   const url = SITE_URL + m.path;
-  const og = page === 'home' ? `og-${lang}.png` : `og-freelance-${lang}.png`;
+  const article = isArticle(page) ? articleOf(page) : null;
+  const og = article ? `og-article-${article.slug}.png` : page === 'freelance' ? `og-freelance-${lang}.png` : `og-${lang}.png`;
   return (
     <html lang={c.htmlLang}>
       <head>
@@ -79,13 +116,17 @@ export function Document({ page, lang, css }: { page: PageId; lang: Lang; css: s
         <title>{m.title}</title>
         <meta name="description" content={m.description} />
         <link rel="canonical" href={url} />
-        <link rel="alternate" hrefLang="en" href={SITE_URL + pathOf(page, 'en')} />
-        <link rel="alternate" hrefLang="fr" href={SITE_URL + pathOf(page, 'fr')} />
-        <link rel="alternate" hrefLang="x-default" href={SITE_URL + pathOf(page, 'en')} />
+        {!article && (
+          <>
+            <link rel="alternate" hrefLang="en" href={SITE_URL + pathOf(page, 'en')} />
+            <link rel="alternate" hrefLang="fr" href={SITE_URL + pathOf(page, 'fr')} />
+            <link rel="alternate" hrefLang="x-default" href={SITE_URL + pathOf(page, 'en')} />
+          </>
+        )}
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossOrigin="" />
         <meta name="theme-color" content="#ffffff" />
-        <meta property="og:type" content="profile" />
+        <meta property="og:type" content={article ? 'article' : 'profile'} />
         <meta property="og:site_name" content="Alexandre Gaubert" />
         <meta property="og:title" content={m.title} />
         <meta property="og:description" content={m.description} />
@@ -93,38 +134,50 @@ export function Document({ page, lang, css }: { page: PageId; lang: Lang; css: s
         <meta property="og:image" content={`${SITE_URL}/${og}`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content={`Alexandre Gaubert · ${m.role}`} />
+        <meta property="og:image:alt" content={article ? `${article.title} · Alexandre Gaubert` : `Alexandre Gaubert · ${m.role}`} />
         <meta property="og:locale" content={c.ogLocale} />
-        <meta property="og:locale:alternate" content={content[other(lang)].ogLocale} />
-        <meta property="profile:first_name" content="Alexandre" />
-        <meta property="profile:last_name" content="Gaubert" />
+        {article ? (
+          <>
+            <meta property="article:published_time" content={article.published} />
+            <meta property="article:author" content={SITE_URL + content.fr.path} />
+          </>
+        ) : (
+          <>
+            <meta property="og:locale:alternate" content={content[other(lang)].ogLocale} />
+            <meta property="profile:first_name" content="Alexandre" />
+            <meta property="profile:last_name" content="Gaubert" />
+          </>
+        )}
         <meta name="twitter:card" content="summary_large_image" />
         <style dangerouslySetInnerHTML={{ __html: css }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(page, lang) }} />
       </head>
-      <body>{page === 'home' ? <Home lang={lang} /> : <Freelance lang={lang} />}</body>
+      <body>{article ? <Article a={article} /> : page === 'home' ? <Home lang={lang} /> : <Freelance lang={lang} />}</body>
     </html>
   );
 }
 
-// The header, the hero and the contact block are shared by both pages; each
-// page gives its own sections, status line and main button.
-function Header({ page, lang, sections }: { page: PageId; lang: Lang; sections: [string, string][] }) {
+// The header, the hero and the contact block are shared by the pages; each
+// page gives its own links, status line and main button. An article has no
+// English version, so no language switch.
+function Header({ page, lang, links }: { page: PageId; lang: Lang; links: [string, string][] }) {
   const alt = other(lang);
   return (
     <>
       <a className="skip" href="#main">{lang === 'en' ? 'Skip to content' : 'Aller au contenu'}</a>
       <header className="wrap top">
         <a className="name" href={content[lang].path}>Alexandre Gaubert</a>
-        <nav aria-label="Sections">
-          {sections.map(([id, label]) => (
-            <a href={`#${id}`} key={id}>{label}</a>
+        <nav aria-label={isArticle(page) ? 'Navigation' : 'Sections'} className={isArticle(page) ? 'keep' : undefined}>
+          {links.map(([href, label]) => (
+            <a href={href} key={href}>{label}</a>
           ))}
-          <a className="lang" href={pathOf(page, alt)} hrefLang={alt}>
-            <span className={lang === 'en' ? 'on' : undefined}>EN</span>
-            <span className={lang === 'fr' ? 'on' : undefined}>FR</span>
-            <span className="sr" lang={alt}>{content[lang].nav.switchLabel}</span>
-          </a>
+          {!isArticle(page) && (
+            <a className="lang" href={pathOf(page, alt)} hrefLang={alt}>
+              <span className={lang === 'en' ? 'on' : undefined}>EN</span>
+              <span className={lang === 'fr' ? 'on' : undefined}>FR</span>
+              <span className="sr" lang={alt}>{content[lang].nav.switchLabel}</span>
+            </a>
+          )}
         </nav>
       </header>
     </>
@@ -210,7 +263,7 @@ function Home({ lang }: { lang: Lang }) {
   );
   return (
     <>
-      <Header page="home" lang={lang} sections={[['work', c.nav.work], ['experience', c.nav.experience], ['writing', c.nav.writing], ['contact', c.nav.contact]]} />
+      <Header page="home" lang={lang} links={[['#work', c.nav.work], ['#experience', c.nav.experience], ['#writing', c.nav.writing], ['#contact', c.nav.contact]]} />
       <Hero lang={lang} role={c.role} lede={c.lede} status={status} mail={mail} mainLabel={c.emailMe} />
 
       <main id="main">
@@ -261,7 +314,7 @@ function Home({ lang }: { lang: Lang }) {
                 <a className="article" href={a.url} key={a.url} hrefLang="fr">
                   <p className="meta">{a.meta}</p>
                   <h3 lang="fr">{a.title}</h3>
-                  <span className="read">{c.writing.read}</span>
+                  <span className="read">{a.read ?? c.writing.read}</span>
                 </a>
               ))}
             </div>
@@ -281,7 +334,7 @@ function Freelance({ lang }: { lang: Lang }) {
   const mail = `mailto:${EMAIL}?subject=${encodeURIComponent(f.mailSubject)}`;
   return (
     <>
-      <Header page="freelance" lang={lang} sections={[['missions', f.nav.missions], ['experience', f.nav.experience], ['contact', f.nav.contact]]} />
+      <Header page="freelance" lang={lang} links={[['#missions', f.nav.missions], ['#experience', f.nav.experience], ['#contact', f.nav.contact]]} />
       <Hero lang={lang} role={f.role} lede={f.lede} status={f.status} mail={mail} mainLabel={f.propose} />
 
       <main id="main">
@@ -316,12 +369,59 @@ function Freelance({ lang }: { lang: Lang }) {
                     <li key={p}>{p}</li>
                   ))}
                 </ul>
+                <p className="more">
+                  {f.agents.more.before}
+                  <a href={f.agents.more.href} hrefLang="fr" lang="fr">{f.agents.more.link}</a>
+                </p>
               </div>
             </div>
           </div>
         </section>
 
         <Contact lang={lang} heading={f.contact.heading} sub={f.contact.sub} mail={mail} />
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+function Text({ parts }: { parts: Inline[] }) {
+  return (
+    <>
+      {parts.map((p, i) => (typeof p === 'string' ? p : <a href={p.href} key={i}>{p.text}</a>))}
+    </>
+  );
+}
+
+function Article({ a }: { a: ArticleContent }) {
+  const f = freelance.fr;
+  const minutes = Math.max(1, Math.round(a.words / 230));
+  return (
+    <>
+      <Header page={`article/${a.slug}`} lang="fr" links={[[f.path, 'Freelance'], [content.fr.path + '#writing', content.fr.nav.writing]]} />
+      <main id="main">
+        <article className="wrap post">
+          <h1>{a.title}</h1>
+          <p className="byline">
+            <a href={content.fr.path}>Alexandre Gaubert</a> · {a.publishedLabel} · <span className="nowrap">{minutes} min de lecture</span>
+          </p>
+          {a.blocks.map((b, i) =>
+            b.kind === 'h2' ? (
+              <h2 key={i}><Text parts={b.text} /></h2>
+            ) : b.kind === 'p' ? (
+              <p key={i}><Text parts={b.text} /></p>
+            ) : (
+              <ul key={i}>
+                {b.items.map((item, j) => (
+                  <li key={j}><Text parts={item} /></li>
+                ))}
+              </ul>
+            ),
+          )}
+          <p className="next">
+            <a className="btn fill" href={f.path}>Voir mon offre freelance</a>
+          </p>
+        </article>
       </main>
       <Footer />
     </>
