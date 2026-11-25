@@ -41,7 +41,7 @@ const articles = {
   providers: 'https://www.linkedin.com/pulse/les-fournisseurs-dia-vont-perdre-leurs-meilleurs-clients-gaubert-eilde/',
 };
 
-const skills = ['React', 'TypeScript', 'TanStack Query', 'TanStack Router', 'Playwright', 'Vitest'];
+const skills = ['React', 'TypeScript', 'Python', 'TanStack Query', 'TanStack Router', 'Playwright', 'Vitest'];
 const support = "L'IA devait remplacer le support client. Elle est en train de le rendre invivable.";
 
 // French typography: a narrow no-break space before « : ; ! ? » and inside « 157 k ».
@@ -57,13 +57,13 @@ export const content: Record<Lang, Content> = {
     path: '/',
     htmlLang: 'en',
     ogLocale: 'en_US',
-    title: 'Alexandre Gaubert · Senior Product Engineer, React & TypeScript',
+    title: 'Alexandre Gaubert · Senior Product Engineer, Fullstack React, TypeScript & Python',
     description:
-      'Senior Product Engineer, 7 years of React and TypeScript, AI agent orchestration. Open to senior frontend and product engineering roles, full remote or hybrid in Rennes.',
+      'Fullstack engineer: 7 years of React and TypeScript, backend experience at Mergify with Python and APIs, AI agent orchestration. Open to fullstack and product engineering roles, full remote or hybrid in Rennes.',
     nav: { work: 'Work', experience: 'Experience', writing: 'Writing', contact: 'Contact', switchLabel: 'Lire en français' },
     role: 'Senior Product Engineer, AI-first',
-    lede: 'Senior frontend engineer with 7 years of React and TypeScript on SaaS products, from frontend architecture to test strategy. As a personal project, I designed an engineering system where a fleet of AI agents plans, codes, tests and ships in parallel, within automated guardrails.',
-    status: 'Open to senior frontend and product engineering roles · Full remote, hybrid possible in Rennes',
+    lede: 'Fullstack engineer with 7 years of React and TypeScript on SaaS products, from frontend architecture to test strategy. Backend experience at Mergify with Python and APIs. As a personal project, I designed an engineering system where a fleet of AI agents plans, codes, tests and ships in parallel, within automated guardrails.',
+    status: 'Open to fullstack and product engineering roles · Full remote, hybrid possible in Rennes',
     emailMe: 'Email me',
     downloadCv: 'Download CV (PDF)',
     work: {
@@ -90,7 +90,7 @@ export const content: Record<Lang, Content> = {
     experience: {
       heading: 'Experience',
       jobs: [
-        { when: '2022 – 2026', title: 'Senior Frontend Engineer · Mergify', text: 'Merge queue and CI tooling for engineering teams.' },
+        { when: '2022 – 2026', title: 'Senior Frontend Engineer · Mergify', text: 'Merge queue and CI tooling for engineering teams. Delivered product-focused backend projects end to end; Python development and API work.' },
         { when: '2019 – 2022', title: 'Frontend Engineer · Cegid', text: 'Tax management applications for businesses, in React, TypeScript and Redux.' },
         { when: '2015 – 2018', title: 'EPITECH · education', text: 'Computer science studies.' },
       ],
@@ -123,13 +123,13 @@ export const content: Record<Lang, Content> = {
     path: '/fr/',
     htmlLang: 'fr',
     ogLocale: 'fr_FR',
-    title: 'Alexandre Gaubert · Senior Product Engineer, React et TypeScript',
+    title: 'Alexandre Gaubert · Senior Product Engineer, Fullstack React, TypeScript & Python',
     description:
-      'Senior Product Engineer, 7 ans de React et TypeScript, orchestration d\'agents IA. Ouvert à un poste senior en frontend ou product engineering, full remote ou hybride à Rennes.',
+      'Ingénieur fullstack : 7 ans de React et TypeScript, expérience backend chez Mergify en Python et sur l\'API, orchestration d\'agents IA. Ouvert à un poste fullstack ou product engineering, full remote ou hybride à Rennes.',
     nav: { work: 'Réalisations', experience: 'Parcours', writing: 'Articles', contact: 'Contact', switchLabel: 'Read in English' },
     role: 'Senior Product Engineer, AI-first',
-    lede: "Ingénieur frontend senior, 7 ans de React et TypeScript sur des produits SaaS, de l'architecture front à la stratégie de test. En projet personnel, j'ai conçu un système d'ingénierie où une flotte d'agents IA planifie, code, teste et livre en parallèle, encadrée par des garde-fous automatisés.",
-    status: 'Ouvert à un poste senior en frontend ou product engineering · Full remote, hybride possible à Rennes',
+    lede: "Ingénieur fullstack, 7 ans de React et TypeScript sur des produits SaaS, de l'architecture front à la stratégie de test. Expérience backend chez Mergify, en Python et sur l'API. En projet personnel, j'ai conçu un système d'ingénierie où une flotte d'agents IA planifie, code, teste et livre en parallèle, encadrée par des garde-fous automatisés.",
+    status: 'Ouvert à un poste fullstack ou product engineering · Full remote, hybride possible à Rennes',
     emailMe: "M'écrire",
     downloadCv: 'Télécharger mon CV (PDF)',
     work: {
@@ -156,7 +156,7 @@ export const content: Record<Lang, Content> = {
     experience: {
       heading: 'Parcours',
       jobs: [
-        { when: '2022 – 2026', title: 'Senior Frontend Engineer · Mergify', text: "Merge queue et outils de CI pour les équipes d'ingénierie." },
+        { when: '2022 – 2026', title: 'Senior Frontend Engineer · Mergify', text: "Merge queue et outils de CI pour les équipes d'ingénierie. Livraison de bout en bout de projets backend orientés produit ; développement Python et interventions sur l'API." },
         { when: '2019 – 2022', title: 'Frontend Engineer · Cegid', text: 'Applications de gestion fiscale pour les entreprises, en React, TypeScript et Redux.' },
         { when: '2015 – 2018', title: 'EPITECH · formation', text: 'Études en informatique.' },
       ],

@@ -18,7 +18,7 @@ function jsonLd(lang: Lang): string {
     image: `${SITE_URL}/photo.jpg`,
     email: EMAIL,
     sameAs: [LINKEDIN],
-    knowsAbout: ['React', 'TypeScript', 'Frontend engineering', 'AI agents'],
+    knowsAbout: ['React', 'TypeScript', 'Python', 'Fullstack engineering', 'AI agents'],
     address: { '@type': 'PostalAddress', addressRegion: 'Bretagne', addressCountry: 'FR' },
   };
   // A "</script>" inside a string would close the tag early.
