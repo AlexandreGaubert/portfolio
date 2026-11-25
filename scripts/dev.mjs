@@ -13,7 +13,7 @@ const server = createServer(async (req, res) => {
     const site = await load();
     const route = site.routes.find((r) => r.path === path || r.path === path + '/');
     const generated = route
-      ? site.render(route.lang)
+      ? site.render(route.page, route.lang)
       : { '/topo.svg': site.renderTopo, '/sitemap.xml': site.sitemap, '/robots.txt': site.robots }[path]?.();
     if (generated) {
       res.writeHead(200, { 'content-type': types[route ? '.html' : extname(path)] });
