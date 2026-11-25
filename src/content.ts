@@ -8,8 +8,8 @@ export const EMAIL = 'alexandre2.gaubert@gmail.com';
 export const LINKEDIN = 'https://www.linkedin.com/in/alexandre-gaubert';
 
 // The CV Alexandre validated, one PDF per language, in public/. Set an entry to
-// null to hide its buttons; both are hidden until the new CV is ready.
-export const CV: Record<Lang, string | null> = { en: null, fr: null };
+// null to hide its buttons.
+export const CV: Record<Lang, string | null> = { en: '/Alexandre-Gaubert-CV-EN.pdf', fr: '/Alexandre-Gaubert-CV-FR.pdf' };
 
 type Work = { title: string; text: string; stack: string };
 type Job = { when: string; title: string; text: string };
@@ -59,10 +59,10 @@ export const content: Record<Lang, Content> = {
     ogLocale: 'en_US',
     title: 'Alexandre Gaubert · Senior Product Engineer, React & TypeScript',
     description:
-      'Senior Product Engineer, 7 years of React and TypeScript. I ship features with AI agents. Open to senior frontend roles, full remote, hybrid possible in Rennes.',
+      'Senior Product Engineer, 7 years of React and TypeScript, AI agent orchestration. Open to senior frontend and product engineering roles, full remote or hybrid in Rennes.',
     nav: { work: 'Work', experience: 'Experience', writing: 'Writing', contact: 'Contact', switchLabel: 'Lire en français' },
     role: 'Senior Product Engineer, AI-first',
-    lede: 'Seven years of React and TypeScript on SaaS products. I ship features end to end with AI agents writing much of the code, under my review.',
+    lede: 'Senior frontend engineer with 7 years of React and TypeScript on SaaS products, from frontend architecture to test strategy. As a personal project, I designed an engineering system where a fleet of AI agents plans, codes, tests and ships in parallel, within automated guardrails.',
     status: 'Open to senior frontend and product engineering roles · Full remote, hybrid possible in Rennes',
     emailMe: 'Email me',
     downloadCv: 'Download CV (PDF)',
@@ -97,18 +97,23 @@ export const content: Record<Lang, Content> = {
     },
     skills: [...skills, 'AI agents'],
     agents: {
-      heading: 'How I work with agents',
+      heading: 'AI agent orchestration cockpit',
       paragraphs: [
-        'For my own projects I built a tool that runs several agents in parallel, each in its own git worktree. Every plan and draft pull request comes back to me as a decision.',
+        'Personal project, 2026 – present',
+        'Desktop app · Electron, React, TypeScript, Claude Agent SDK',
+        'Runs a fleet of Claude Code agents in parallel: manager agents split each project into workstreams and launch workers, each in its own git worktree and branch.',
+        "A single queue surfaces only the human's decisions (plans, product trade-offs, release calls), with options and a recommendation; orphaned requests are relaunched, pull requests verified in production.",
+        'Guardrails: scope set before any code by an agent blind to the implementation; adversarial review by a separate agent; a test only counts once seen failing; Claude Code hooks block destructive git commands.',
+        'Operations: incidents shared across agents, then fixed in the tooling; token cost measured per session.',
       ],
     },
     writing: {
       heading: 'Writing',
-      sub: 'Articles on AI, published on LinkedIn, in French.',
+      sub: '5 articles and 19 LinkedIn posts on AI (mostly in French), 530k impressions in total, up to 231k for one article',
       read: 'Read on LinkedIn',
       articles: [
-        { title: "Les fournisseurs d'IA vont perdre leurs meilleurs clients", url: articles.providers, meta: '157k impressions on the post' },
-        { title: support, url: articles.support, meta: '231k impressions on the post' },
+        { title: "Les fournisseurs d'IA vont perdre leurs meilleurs clients", url: articles.providers, meta: '157k impressions' },
+        { title: support, url: articles.support, meta: '231k impressions' },
       ],
     },
     contact: { heading: 'Contact' },
@@ -120,10 +125,10 @@ export const content: Record<Lang, Content> = {
     ogLocale: 'fr_FR',
     title: 'Alexandre Gaubert · Senior Product Engineer, React et TypeScript',
     description:
-      'Senior Product Engineer, 7 ans de React et TypeScript. Je code avec des agents IA. Ouvert à un poste frontend senior, full remote, hybride possible à Rennes.',
+      'Senior Product Engineer, 7 ans de React et TypeScript, orchestration d\'agents IA. Ouvert à un poste senior en frontend ou product engineering, full remote ou hybride à Rennes.',
     nav: { work: 'Réalisations', experience: 'Parcours', writing: 'Articles', contact: 'Contact', switchLabel: 'Read in English' },
     role: 'Senior Product Engineer, AI-first',
-    lede: "Sept ans de React et TypeScript sur des produits SaaS. Je livre des fonctionnalités de bout en bout avec des agents IA qui écrivent une grande partie du code, sous ma relecture.",
+    lede: "Ingénieur frontend senior, 7 ans de React et TypeScript sur des produits SaaS, de l'architecture front à la stratégie de test. En projet personnel, j'ai conçu un système d'ingénierie où une flotte d'agents IA planifie, code, teste et livre en parallèle, encadrée par des garde-fous automatisés.",
     status: 'Ouvert à un poste senior en frontend ou product engineering · Full remote, hybride possible à Rennes',
     emailMe: "M'écrire",
     downloadCv: 'Télécharger mon CV (PDF)',
@@ -158,18 +163,23 @@ export const content: Record<Lang, Content> = {
     },
     skills: [...skills, 'Agents IA'],
     agents: {
-      heading: 'Comment je travaille avec les agents',
+      heading: "Cockpit d'orchestration d'agents\u00a0IA",
       paragraphs: [
-        "Pour mes projets personnels, j'ai construit un outil qui fait travailler plusieurs agents en parallèle, chacun dans son propre worktree git. Chaque plan et chaque pull request en draft me revient sous forme de décision.",
+        'Projet personnel, depuis 2026',
+        'App desktop · Electron, React, TypeScript, Claude Agent SDK',
+        "Orchestre en parallèle une flotte d'agents Claude Code : des agents managers découpent chaque projet en chantiers et lancent des workers, chacun dans son worktree git et sa branche.",
+        "Une file unique ne remonte à l'humain que ses décisions (plans, arbitrages produit, mises en production), avec options et recommandation ; demandes orphelines relancées, pull requests vérifiées en production.",
+        "Garde-fous : périmètre fixé avant le code par un agent qui ignore l'implémentation ; revue adverse par un agent séparé ; un test ne compte qu'une fois vu échouer ; des hooks Claude Code bloquent les commandes git destructrices.",
+        'Exploitation : incidents partagés entre agents puis corrigés dans l\'outillage ; coût en tokens mesuré par session.',
       ],
     },
     writing: {
       heading: 'Articles',
-      sub: "Des articles sur l'IA, publiés sur LinkedIn.",
+      sub: "5 articles et 19 posts LinkedIn sur l'IA, 530 k impressions au total, jusqu'à 231 k pour un article",
       read: 'Lire sur LinkedIn',
       articles: [
-        { title: "Les fournisseurs d'IA vont perdre leurs meilleurs clients", url: articles.providers, meta: '157 k impressions sur le post' },
-        { title: support, url: articles.support, meta: '231 k impressions sur le post' },
+        { title: "Les fournisseurs d'IA vont perdre leurs meilleurs clients", url: articles.providers, meta: '157 k impressions' },
+        { title: support, url: articles.support, meta: '231 k impressions' },
       ],
     },
     contact: { heading: 'Contact' },

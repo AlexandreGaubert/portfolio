@@ -41,7 +41,7 @@ header.top nav a.lang:hover { color: inherit; border-color: #c9d0d8; }
 .hero .wrap { position: relative; display: grid; grid-template-columns: 1fr 260px; gap: 56px; align-items: center; padding-top: 72px; padding-bottom: 88px; }
 .hero h1 { font-size: 64px; line-height: 1.02; letter-spacing: -0.02em; font-weight: 700; }
 .hero h1 .role { display: block; color: var(--rust); font-size: 0.72em; line-height: 1.15; margin-top: 6px; }
-.hero .lede { font-size: 21px; max-width: 34ch; margin-top: 24px; color: #2b3640; }
+.hero .lede { font-size: 21px; max-width: 44ch; margin-top: 24px; color: #2b3640; }
 .status { display: inline-flex; align-items: flex-start; gap: 10px; margin-top: 28px; font-size: 15px; background: #eef4fa; border-radius: 10px; padding: 10px 14px; color: #1f4466; }
 .status i { width: 8px; height: 8px; border-radius: 50%; background: #2f9e6a; flex: none; margin-top: 8px; }
 .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
