@@ -44,6 +44,8 @@ header.top nav a.lang:hover { color: inherit; border-color: #c9d0d8; }
 .hero .lede { font-size: 21px; max-width: 44ch; margin-top: 24px; color: #2b3640; }
 .status { display: inline-flex; align-items: flex-start; gap: 10px; margin-top: 28px; font-size: 15px; background: #eef4fa; border-radius: 10px; padding: 10px 14px; color: #1f4466; }
 .status a { color: inherit; font-weight: 600; text-underline-offset: 3px; }
+/* The place and work mode move to the next line as a whole rather than leaving one word alone. */
+.status .keep { display: inline-block; }
 .status i { width: 8px; height: 8px; border-radius: 50%; background: #2f9e6a; flex: none; margin-top: 8px; }
 .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 .btn { display: inline-flex; align-items: center; height: 46px; padding: 0 20px; border-radius: 10px; border: 1px solid var(--line); background: #fff; font-weight: 600; font-size: 16px; text-decoration: none; }

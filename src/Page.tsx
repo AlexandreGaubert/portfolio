@@ -11,7 +11,7 @@ function meta(page: PageId, lang: Lang) {
   return { path: c.path, title: c.title, description: c.description, role: c.role };
 }
 
-const pathOf = (page: PageId, lang: Lang) => meta(page, lang).path;
+export const pathOf = (page: PageId, lang: Lang) => meta(page, lang).path;
 
 // "AI-first" must not break after its hyphen.
 function keepHyphenated(text: string) {
@@ -194,7 +194,9 @@ function Jobs({ jobs }: { jobs: { when: string; title: string; text: string }[] 
   );
 }
 
-const footer = <footer className="wrap">© {new Date().getFullYear()} Alexandre Gaubert</footer>;
+function Footer() {
+  return <footer className="wrap">© {new Date().getFullYear()} Alexandre Gaubert</footer>;
+}
 
 function Home({ lang }: { lang: Lang }) {
   const c = content[lang];
@@ -203,7 +205,7 @@ function Home({ lang }: { lang: Lang }) {
     <>
       {c.status.before}
       <a href={freelance[lang].path}>{c.status.link}</a>
-      {c.status.after}
+      <span className="keep">{c.status.after}</span>
     </>
   );
   return (
@@ -268,7 +270,7 @@ function Home({ lang }: { lang: Lang }) {
 
         <Contact lang={lang} heading={c.contact.heading} mail={mail} />
       </main>
-      {footer}
+      <Footer />
     </>
   );
 }
@@ -321,7 +323,7 @@ function Freelance({ lang }: { lang: Lang }) {
 
         <Contact lang={lang} heading={f.contact.heading} sub={f.contact.sub} mail={mail} />
       </main>
-      {footer}
+      <Footer />
     </>
   );
 }

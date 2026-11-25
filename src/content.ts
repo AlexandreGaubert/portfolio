@@ -209,19 +209,20 @@ export type FreelanceContent = {
   contact: { heading: string; sub: string };
 };
 
-// The offer, also given to search engines as structured data.
+// The offer, written once: the visible text and the structured data both read it.
 export const OFFER = { dayRate: 450, currency: 'EUR', availableFrom: '2027-01-04' };
+const rate = OFFER.dayRate;
 
 export const freelance: Record<Lang, FreelanceContent> = {
   en: {
     path: '/freelance/',
     title: 'Freelance senior fullstack React developer, Rennes and remote · Alexandre Gaubert',
     description:
-      'Freelance senior fullstack developer: 7 years of React and TypeScript on SaaS products, four of them at Mergify. Day rate €450 excl. VAT, available early January 2027, full remote or hybrid in Rennes.',
+      `Freelance senior fullstack React developer: day rate €${rate} excl. VAT, available early January 2027, full remote or hybrid in Rennes. 7 years of React and TypeScript, four of them at Mergify.`,
     nav: { missions: 'Contracts', experience: 'Experience', contact: 'Contact' },
     role: 'Senior fullstack developer, React and TypeScript, freelance',
-    lede: 'I join your product team to ship features end to end, API included, on tested TypeScript code. 7 years of React and TypeScript on SaaS products, four of them at Mergify.',
-    status: 'Day rate €450 excl. VAT · Available early January 2027 · Full remote or hybrid in Rennes',
+    lede: 'I join your product team to ship React features, API included, on tested TypeScript code. 7 years of React and TypeScript on SaaS products, four of them at Mergify.',
+    status: `Day rate €${rate} excl. VAT · Available early January 2027 · Full remote or hybrid in Rennes`,
     propose: 'Propose a contract',
     mailSubject: 'Freelance contract – via alexandre-gaubert.fr',
     missions: {
@@ -237,8 +238,8 @@ export const freelance: Record<Lang, FreelanceContent> = {
     experience: {
       heading: 'Experience',
       jobs: [
-        { when: '2022 – 2026', title: 'Senior Frontend Engineer · Mergify', text: 'Features across the merge queue and CI Insights, frontend test strategy, backend projects in Python.' },
-        { when: '2019 – 2022', title: 'Frontend Engineer · Cegid', text: 'Tax management applications for businesses, in React, TypeScript and Redux.' },
+        { when: '2022 – 2026', title: 'Senior Frontend Engineer · Mergify', text: 'Features across the merge queue and CI Insights, design system, frontend test strategy, backend projects in Python.' },
+        content.en.experience.jobs[1],
       ],
     },
     agents: {
@@ -256,18 +257,18 @@ export const freelance: Record<Lang, FreelanceContent> = {
     path: '/fr/freelance/',
     title: 'Développeur fullstack React freelance senior, Rennes et remote · Alexandre Gaubert',
     description:
-      'Développeur fullstack senior en freelance : 7 ans de React et TypeScript sur des produits SaaS, dont quatre chez Mergify. TJM 450 € HT, disponible début janvier 2027, full remote ou hybride à Rennes.',
+      `Développeur fullstack React freelance senior : TJM ${rate} € HT, disponible début janvier 2027, full remote ou hybride à Rennes. 7 ans de React et TypeScript, dont quatre chez Mergify.`,
     nav: { missions: 'Missions', experience: 'Parcours', contact: 'Contact' },
     role: 'Développeur fullstack senior, React et TypeScript, en freelance',
-    lede: 'Je rejoins votre équipe produit pour livrer des fonctionnalités de bout en bout, API comprise, sur un code TypeScript testé. 7 ans de React et TypeScript sur des produits SaaS, dont quatre chez Mergify.',
-    status: 'TJM 450 € HT par jour · Disponible début janvier 2027 · Full remote ou hybride à Rennes',
+    lede: 'Je rejoins votre équipe produit pour livrer des fonctionnalités React, API comprise, sur un code TypeScript testé. 7 ans de React et TypeScript sur des produits SaaS, dont quatre chez Mergify.',
+    status: `TJM ${rate} € HT par jour · Disponible début janvier 2027 · Full remote ou hybride à Rennes`,
     propose: 'Proposer une mission',
     mailSubject: 'Mission freelance – via alexandre-gaubert.fr',
     missions: {
       heading: 'Ce que je fais en mission',
       sub: "En renfort d'une équipe produit, sur un front React existant.",
       items: [
-        { title: 'Livrer des fonctionnalités de bout en bout', text: "Composants, état, appels et tests côté React, et l'API qui va avec côté back-end.", stack: 'React, TypeScript, TanStack Query, Python' },
+        { title: 'Livrer des fonctionnalités de bout en bout', text: "Composants, état, appels et tests côté React, et l'API qui va avec côté backend.", stack: 'React, TypeScript, TanStack Query, Python' },
         { title: 'Moderniser un front existant', text: "Introduire TypeScript dans une base JavaScript, migrer le routing ou la gestion d'état.", stack: 'TypeScript, TanStack Router, Zustand' },
         { title: 'Poser la stratégie de test du front', text: "Tests end-to-end, d'intégration et unitaires, de la CI à la revue de code.", stack: 'Playwright, Cypress, Vitest' },
         { title: 'Faire vivre un design system', text: 'Construire et faire évoluer les composants partagés avec votre UX designer.', stack: 'React, TypeScript' },
@@ -276,8 +277,8 @@ export const freelance: Record<Lang, FreelanceContent> = {
     experience: {
       heading: 'Parcours',
       jobs: [
-        { when: '2022 – 2026', title: 'Senior Frontend Engineer · Mergify', text: 'Fonctionnalités sur la merge queue et CI Insights, stratégie de test du front, projets back-end en Python.' },
-        { when: '2019 – 2022', title: 'Frontend Engineer · Cegid', text: 'Applications de gestion fiscale pour les entreprises, en React, TypeScript et Redux.' },
+        { when: '2022 – 2026', title: 'Senior Frontend Engineer · Mergify', text: 'Fonctionnalités sur la merge queue et CI Insights, design system, stratégie de test du front, projets backend en Python.' },
+        content.fr.experience.jobs[1],
       ],
     },
     agents: {
